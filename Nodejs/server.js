@@ -6,26 +6,24 @@ const port = 3000;
 const logger = require('./routes/logger');
 const mongoose = require('mongoose');
 
-// Middleware Funktionen
-// Parse JSON Bodies
+// Routes
+const storiesRoute = require('./routes/stories');
+
+// Middleware functions
 app.use(express.json());
-// Use morgan for logging
 morgan.format('logFormat', logger.morganFormat);
 app.use(morgan('[:logFormat] [API CALL]   :method :url :status - :remote-addr - :response-time ms'));
-// Statische Dateien bereitstellen
 app.use(express.static('public'));
 
-// Beispiel Route
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-});
+// Use Routes
+app.use('/stories', storiesRoute);
 
 // Server starten
 app.listen(port, () => {
     console.info(`Server listening at http://localhost:${port}`)
 });
 
-// MongoDB
+// MongoDB connection
 mongoose.connect('mongodb://localhost:27017/ReadingTheater', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Listen to open and error event
