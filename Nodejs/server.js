@@ -9,6 +9,8 @@ const logger = require('./routes/logger');
 app.use(express.json());
 // Use log function from Logger
 app.use(logger.log);
+// Statische Dateien bereitstellen
+app.use(express.static('public'));
 
 // Beispiel Route
 app.get('/', (req, res) => {
