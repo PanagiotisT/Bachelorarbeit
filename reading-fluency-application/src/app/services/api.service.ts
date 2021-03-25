@@ -9,6 +9,6 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   getStories() {
-    return this.httpClient.get('/stories');
+    return this.httpClient.get('http://localhost:3000/stories');
   }
 }

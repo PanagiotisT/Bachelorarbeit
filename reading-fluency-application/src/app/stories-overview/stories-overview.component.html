@@ -1,1 +1,40 @@
-<p>stories-overview works!</p>
+<h1 class="pageTitle">Geschichten Übersicht</h1>
+
+<div class="container" style="max-width: 1250px">
+	<div *ngFor="let story of stories;">
+		<div class="row mt-4 justify-content-center">
+			<div class="col-md-3 v-center">
+				<img [src]="sanitizeImageUrl(story.image)" alt="{{story.name}}" class="img-thumbnail">
+			</div>
+			<div class="col-md-5 ml-3">
+				<div class="row mb-2">
+					<h3>{{story.name}}</h3>
+				</div>
+
+				<div class="row">
+					{{story.description}}
+				</div>
+
+			</div>
+			<div class="col-md-3 text-center my-auto">
+				<div class="row justify-content-center">
+					<div><h6 style="display: inline">{{story.characters.total}}</h6> Charaktere</div>
+				</div>
+
+				<div class="row mb-2">
+					<div class="col-12">
+						<!-- Sind die Informationen notwendig wie viele Charaktäre und ob es einen Erzähler gibt?-->
+						<div *ngIf="story.characters.teller == true"><h6 style="display: inline"></h6> Erzähler & {{story.characters.character.length}} Charaktere</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<button type="button" class="btn btn-primary mt-2" (click)="selectStory(story)">Auswählen</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr/>
+	</div>
+</div>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api.service';
@@ -13,6 +14,7 @@ import { SceneOverviewComponent } from './scene-overview/scene-overview.componen
 import { StoriesOverviewComponent } from './stories-overview/stories-overview.component';
 import { TextfieldComponent } from './textfield/textfield.component';
 import { UnityWebGlComponent } from './unity-web-gl/unity-web-gl.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,14 @@ import { UnityWebGlComponent } from './unity-web-gl/unity-web-gl.component';
     SceneOverviewComponent,
     StoriesOverviewComponent,
     TextfieldComponent,
-    UnityWebGlComponent
+    UnityWebGlComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [ApiService, DataService, LogService, SocketService],
+  providers: [ApiService, DataService, LogService, SocketService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

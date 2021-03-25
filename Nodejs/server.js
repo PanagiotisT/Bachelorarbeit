@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
@@ -10,6 +11,7 @@ const mongoose = require('mongoose');
 const storiesRoute = require('./routes/stories');
 
 // Middleware functions
+app.use(cors());
 app.use(express.json());
 morgan.format('logFormat', logger.morganFormat);
 app.use(morgan('[:logFormat] [API CALL]   :method :url :status - :remote-addr - :response-time ms'));
