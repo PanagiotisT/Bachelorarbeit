@@ -15,6 +15,9 @@ import { StoriesOverviewComponent } from './stories-overview/stories-overview.co
 import { TextfieldComponent } from './textfield/textfield.component';
 import { UnityWebGlComponent } from './unity-web-gl/unity-web-gl.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [ApiService, DataService, LogService, SocketService,],
   bootstrap: [AppComponent]

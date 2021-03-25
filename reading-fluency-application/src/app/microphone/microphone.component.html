@@ -1,1 +1,26 @@
-<p>microphone works!</p>
+<div class="text-center">
+	<h1 class="mb-4">Microphone Component</h1>
+
+	<div class="row justify-content-center">
+
+		<div class="col-md-2">
+			<i class="bi bi-record-circle-fill black"></i>
+			<i class="bi bi-arrow-bar-left"></i>
+			<button type="button" class="btn btn-success" (click)="startRecording()">
+				Start recording
+			</button>
+		</div>
+
+		<div class="col-md-2">
+			<button type="button" class="btn btn-success" (click)="stopRecording()">
+				Stop recording
+			</button>
+		</div>
+
+		<div class="col-md-2">
+			<button type="button" class="btn btn-success">
+				Replay
+			</button>
+		</div>
+	</div>
+</div>
