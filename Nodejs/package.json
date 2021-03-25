@@ -12,9 +12,10 @@
   "dependencies": {
     "@types/socket.io": "^2.1.13",
     "axios": "^0.21.1",
+    "console-stamp": "^0.2.9",
     "express": "^4.17.1",
-    "log-timestamp": "^0.3.0",
     "mongoose": "^5.11.18",
+    "morgan": "^1.10.0",
     "socket.io": "^3.0.5",
     "socket.io-stream": "^0.9.1"
   },
