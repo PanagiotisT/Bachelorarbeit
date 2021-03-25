@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  getStories() {
+    return this.httpClient.get('/stories');
+  }
 }
