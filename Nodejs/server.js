@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const io = require('socket.io')
 const app = express();
 const port = 3000;
 
@@ -19,6 +20,19 @@ app.use(express.static('public'));
 
 // Use Routes
 app.use('/stories', storiesRoute);
+
+// io.on für den Stream erstellen
+// Auslagern in eigene Datei
+// SocketIO Testing
+io.on('connection', (socket) => {
+    console.log('Connected');
+
+    socket.emit('test emit', 'Data vom Server');
+
+    socket.on('disconnect', () => {
+        console.log('Disconnected');
+    });
+});
 
 // Server starten
 app.listen(port, () => {
