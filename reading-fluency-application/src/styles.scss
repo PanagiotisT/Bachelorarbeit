@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+
+// Mit .scss kann man Eigenschaften anderer Klassen verwenden.
+
+.pageTitle {
+	@extend .mb-5;
+	@extend .mt-4;
+	@extend .text-center;
+}
+
+.row-spaced {
+	@extend .row;
+	@extend .p-4;
+	@extend .m-2;
+
+	@extend .border;
+	@extend .border-dark;
+}
+
+.restrictHeight {
+	@extend .pb-1;
+	padding-top: 2.5rem;
+}
+
+.card-with-limits {
+	@extend .card;
+
+	margin-bottom: 1rem;
+	margin-left: 0.5rem !important;
+	margin-right: 0.5rem !important;
+
+	min-width: 15rem;
+	max-width: 15rem;
+}
+
+.border-2 {
+	@extend .border-dark;
+	border-width: 1px;
+}
+
