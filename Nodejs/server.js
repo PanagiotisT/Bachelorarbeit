@@ -1,8 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const io = require('socket.io')
-const app = express();
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http, {
+    cors: {
+        origins: ['http://localhost:4200']
+    }});
 const port = 3000;
 
 const logger = require('./routes/logger');
@@ -25,17 +29,17 @@ app.use('/stories', storiesRoute);
 // Auslagern in eigene Datei
 // SocketIO Testing
 io.on('connection', (socket) => {
-    console.log('Connected');
+    console.info('Client-socket connected successfully');
 
     socket.emit('test emit', 'Data vom Server');
 
     socket.on('disconnect', () => {
-        console.log('Disconnected');
+        console.info('Client-socket connection disconnected');
     });
 });
 
 // Server starten
-app.listen(port, () => {
+http.listen(port, () => {
     console.info(`Server listening at http://localhost:${port}`)
 });
 

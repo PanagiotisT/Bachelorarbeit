@@ -46,7 +46,7 @@
  * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
  *
  *  in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
- *  with the following flag, it will bypass `zone.js` patch for IE/Edge
+ *  with the following flag, it will bypass `zone.js` patch for IE/Edges
  *
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
@@ -61,3 +61,8 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+
+// Für Socket.io
+// https://github.com/angular/angular-cli/issues/8160#issuecomment-386153833
+(window as any).global = window;

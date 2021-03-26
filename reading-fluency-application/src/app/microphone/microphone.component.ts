@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import * as RecordRTC from 'recordrtc';
 import { LogService } from '../services/log.service';
-import { take } from 'rxjs/operators';
 
 const constraints = { audio: true };
 
