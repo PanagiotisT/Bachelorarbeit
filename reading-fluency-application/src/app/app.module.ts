@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from "@angular/common";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,9 +16,7 @@ import { StoriesOverviewComponent } from './stories-overview/stories-overview.co
 import { TextfieldComponent } from './textfield/textfield.component';
 import { UnityWebGlComponent } from './unity-web-gl/unity-web-gl.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:3080', options: {} };
 
 @NgModule({
   declarations: [
@@ -31,9 +30,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3080', options: {} };
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    HttpClientModule,
-    SocketIoModule.forRoot(config)
+    HttpClientModule
   ],
   providers: [ApiService, DataService, LogService, SocketService],
   bootstrap: [AppComponent]

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import * as RecordRTC from 'recordrtc';
 import { LogService } from '../services/log.service';
-
-const constraints = { audio: true };
+import { DomSanitizer } from '@angular/platform-browser';
+import { Options } from 'recordrtc';
 
 @Component({
   selector: 'app-microphone',
@@ -11,59 +11,70 @@ const constraints = { audio: true };
   styleUrls: ['./microphone.component.scss']
 })
 
-export class MicrophoneComponent implements OnInit, OnDestroy {
+export class MicrophoneComponent {
+
+  readonly constraints = { audio: true, video: false };
 
   public recordAudio: any;
+  mediaStream: any;
+  audioURL: any;
+  recordingStarted: boolean = undefined;
+  canAnalyzeAudio: boolean = false;
 
-  constructor(public socketService: SocketService, private logService: LogService) { }
+  constructor(public socketService: SocketService, private logService: LogService, private domSanitizer: DomSanitizer) { }
 
-  ngOnInit() {
-    console.log('ON INIT');
-    this.socketService.listen('test emit').subscribe( (data) => {
-      this.logService.text(this, data);
-    });
+  sanitizeAudioUrl(url: string) {
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
   }
 
-  ngOnDestroy() {
-    this.logService.text(this, 'On Destroy');
-  }
-
-  // Call from Button
-  startRecording() {
+  recordingStart() {
     console.log('Start recording');
-    navigator.mediaDevices.getUserMedia(constraints).then(this.successCallback.bind(this), this.errorCallback.bind(this));
+    this.recordingStarted = true;
+    this.canAnalyzeAudio = false;
+    navigator.mediaDevices.getUserMedia(this.constraints).then(this.successCallback.bind(this), this.errorCallback.bind(this));
   }
 
   successCallback(stream) {
+    this.mediaStream = stream;
     const that  = this;
-    const options = {
+    const options : Options = {
       type: 'audio',
-      mimeType: 'audio/webm',
+      // mimeType: 'audio/webm',
+      recorderType: RecordRTC.StereoAudioRecorder,
       sampleRate: 44100,
       audioBitsPerSecond : 128000,
-      desiredSampleRate: 16000,
-      timeSlice: 4000,
+      numberOfAudioChannels: 1,
+      desiredSampRate: 16000,
+      timeSlice: 2000,
       ondataavailable(blob) {
         console.log(blob);
-      } // get intervals based blobs
+        // that.socketService.emit('start-record-audio', blob);
+      }
     };
 
-    this.recordAudio = new RecordRTC.MediaStreamRecorder(stream, options);
-    this.recordAudio.record();
+    this.recordAudio = new RecordRTC(this.mediaStream, options);
+    this.recordAudio.startRecording();
   }
 
-  stopRecording() {
+  recordingStop() {
+    // Stop recording button nur drücken können, wenn eine Aufnahme gestartet wurde!
     console.log('Stop recording');
-    this.recordAudio.stop(() => {
-      // below one is recommended
-      // const blob = this.getBlob();
-      // console.log(blob);
-
-      // Was steht in dem Blob?
-    });
+    // this.socketService.emit('stop-record-audio', '');
+    console.log(this.recordAudio.getBlob())
+    this.recordAudio.stopRecording( () => {
+      let blobAudio = this.recordAudio.getBlob();
+      // this.socketService.emit('start-record-audio', blobAudio);
+      this.audioURL = URL.createObjectURL(blobAudio);
+      console.log(URL.createObjectURL(blobAudio));
+      this.mediaStream.stop();
+      this.recordingStarted = false;
+      this.canAnalyzeAudio = true;
+      this.socketService.emit('stop-record-audio', blobAudio)
+    })
   }
 
   errorCallback(error) {
+    console.log(error);
   }
 
 }

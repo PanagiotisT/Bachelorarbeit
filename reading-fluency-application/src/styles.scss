@@ -43,3 +43,11 @@
 	background: none !important;
 }
 
+.not-clickable {
+	@extend .disabled;
+
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
