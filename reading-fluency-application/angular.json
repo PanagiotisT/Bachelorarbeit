@@ -31,7 +31,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/Build/UnityLoader.js"
+              "src/assets/Geschichte1/Build/UnityLoader.js",
+              "src/assets/Geschichte2/Build/UnityLoader.js"
             ]
           },
           "configurations": {

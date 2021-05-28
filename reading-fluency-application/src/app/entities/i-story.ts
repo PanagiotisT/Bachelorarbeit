@@ -2,6 +2,7 @@ export interface IStory {
   name: string;
   description: string;
   image: string;
+  unityWebGL: string;
 
   scenes: Array<IScene>;
   characters: ICharacter;

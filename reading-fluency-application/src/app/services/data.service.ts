@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IScene, IStory } from '../entities/i-story';
 import { BehaviorSubject, } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,15 @@ export class DataService {
   currentScene = this.scene.asObservable();
   currentIndex = this.index.asObservable();
 
-  constructor() {
-    this.checkLocalStorageForValues();
+  audioLengthInSeconds: number;
+  audioUrl;
+
+  constructor(private domSanitizer: DomSanitizer) {
+    // this.checkLocalStorageForValues();
+  }
+
+  sanitizeUrl(url: string) {
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
   }
 
   checkLocalStorageForValues() {
@@ -46,5 +54,13 @@ export class DataService {
 
   getLocalStorageData(storageName: string) {
     return JSON.parse(localStorage.getItem(storageName));
+  }
+
+  setAudioUrl(url) {
+   this.audioUrl = url;
+  }
+
+  getAudioUrl() {
+    return this.audioUrl;
   }
 }

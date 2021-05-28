@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { SocketService } from '../services/socket.service';
+import { IStory } from '../entities/i-story';
 
 @Component({
   selector: 'app-unity-web-gl',
@@ -9,45 +11,39 @@ import { DataService } from '../services/data.service';
 export class UnityWebGlComponent implements OnInit {
 
   gameInstance: any;
-  progress = 0;
   isReady = false;
 
   currentIndex: number;
+  currentStory: IStory;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private socketService: SocketService) {
     this.dataService.currentIndex.subscribe( index => {
       this.currentIndex = index;
     });
+
+    this.dataService.currentStory.subscribe( story => {
+      this.currentStory = story;
+    })
+
+    this.socketService.listen('receive-emotions').subscribe( emotion => {
+      this.sendInformationToUnity(emotion);
+    })
   }
 
   ngOnInit(): void {
     const loader = (window as any).UnityLoader;
 
-    // Anpassen / Odnername wird immer der Story.name sein und der Index zeigt welche Szene geladen werden soll
-    this.gameInstance = loader.instantiate(
-        'gameContainer',
-        '/assets/Build/Unity.json', {
-          onProgress: (gameInstance: any, progress: number) => {
-            this.progress = progress;
-            if (progress === 1) {
-              this.isReady = true;
-            }
-          }
-        });
+    this.gameInstance = loader.instantiate('gameContainer', `/assets/${this.currentStory.unityWebGL}/Build/BuildTest.json`);
   }
 
-  // Unity Funktion aufrufen:
-  // this.gameInstance.SendMessage(Parameter 1 = Das GameObject von Unity, welches angesprochen werden soll Bsp.: 'GameObject',
-  //                               Parameter 2 = Der Methodennamen aus dem GameObject Bsp.: 'ChangeDisplayText',
-  //                               Parameter 3 = Parameter für die aufgerufene Funktion die Übergeben werden sollen)
-
-
-  // Werte aus Unity empfangen:
-  // https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html
-  // In Unity eine .jslib Datei erstellen Funktion erstellen, die einen Pointer aus einer C# Funktion bekommt und an eine window funktion sendet
-
   changeUnityScene() {
-    this.gameInstance.SendMessage('SceneManager', 'loadSceneWithIndex', this.currentIndex);
+    this.gameInstance.SendMessage('SceneLoader', 'loadSceneWithIndex', this.currentIndex);
+  }
+
+  sendInformationToUnity(emotions) {
+    this.gameInstance.SendMessage('LogicHandler', 'receiveEmotions', emotions);
+    this.gameInstance.SendMessage('LogicHandler', 'receiveAudioUrl', this.dataService.audioUrl);
+    this.gameInstance.SendMessage('LogicHandler', 'receiveAudioLength', this.dataService.audioLengthInSeconds);
   }
 
 }

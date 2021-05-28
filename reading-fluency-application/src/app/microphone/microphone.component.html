@@ -1,38 +1,28 @@
-<div class="text-center">
-	<h1 class="mb-4">Microphone Component</h1>
-
+<div class="text-center mt-4">
 	<div class="row justify-content-center">
 
-		<div class="col-md-2">
-<!--			<i class="bi bi-record-circle-fill black"></i>-->
-<!--			<i class="bi bi-arrow-bar-left"></i>-->
+		<div class="col-md-4">
 			<button type="button"
 					class="btn btn-success"
-					[innerText]="!canAnalyzeAudio ? 'Start recording' : 'Record again'"
 					[ngClass]="recordingStarted ? 'not-clickable' : ''"
-					(click)="recordingStart()" >
+					[disabled]="recordingStarted"
+					(click)="startRecording()">
+				Start recording
 			</button>
 		</div>
 
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<button type="button"
 					class="btn btn-success"
 					[ngClass]="!recordingStarted ? 'not-clickable' : ''"
-					(click)="recordingStop()">
+					[disabled]="!recordingStarted"
+					(click)="stopRecording()">
 				Stop recording
-			</button>
-		</div>
-
-		<div class="col-md-2">
-			<button type="button"
-					class="btn btn-success"
-					[ngClass]="!canAnalyzeAudio ? 'not-clickable' : ''">
-				Audio Analysieren
 			</button>
 		</div>
 	</div>
 
-	<audio controls="" *ngIf="recordingStarted != undefined && !recordingStarted" class="mt-3">
-		<source [src]="sanitizeAudioUrl(audioURL)" type="audio/wav">
+	<audio controls="" *ngIf="this.dataService.getAudioUrl() != undefined && !recordingStarted" class="mt-3">
+		<source [src]="dataService.sanitizeUrl(this.dataService.getAudioUrl())" type="audio/wav">
 	</audio>
 </div>

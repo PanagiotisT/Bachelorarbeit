@@ -16,6 +16,7 @@ import { StoriesOverviewComponent } from './stories-overview/stories-overview.co
 import { TextfieldComponent } from './textfield/textfield.component';
 import { UnityWebGlComponent } from './unity-web-gl/unity-web-gl.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RecordService } from './services/record.service';
 
 
 @NgModule({

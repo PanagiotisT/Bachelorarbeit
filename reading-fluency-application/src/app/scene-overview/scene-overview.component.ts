@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { IStory } from '../entities/i-story';
 import { LogService } from '../services/log.service';
@@ -9,16 +9,16 @@ import { UnityWebGlComponent } from '../unity-web-gl/unity-web-gl.component';
   templateUrl: './scene-overview.component.html',
   styleUrls: ['./scene-overview.component.scss']
 })
-export class SceneOverviewComponent implements OnInit{
+export class SceneOverviewComponent {
 
   @ViewChild(UnityWebGlComponent) child: UnityWebGlComponent;
 
   story: IStory;
   sceneIndex: number;
 
-  messageFromUnity = 'Hier erscheint die Nachricht die von Unity empfangen wird.';
+  constructor(public dataService: DataService, private logService: LogService) {
+    this.dataService.setAudioUrl(undefined);
 
-  constructor(private dataService: DataService, private logService: LogService) {
     this.dataService.currentStory.subscribe( story => {
       this.story = story;
       console.log(this.constructor.name);
@@ -29,14 +29,6 @@ export class SceneOverviewComponent implements OnInit{
       this.sceneIndex = index;
       console.log(this.constructor.name + '  ' + index);
     });
-
-    logService.text(this, 'Constructor message!');
-  }
-
-  ngOnInit(): void {
-    (window as any).sendButtonMessageListener = (message: string) => {
-      this.messageFromUnity = message;
-    };
   }
 
   selectScene(index: number) {

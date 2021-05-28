@@ -15,7 +15,7 @@ export class StoriesOverviewComponent implements OnInit {
 
   stories: IStories;
 
-  constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private dataService: DataService, private router: Router) {
+  constructor(private apiService: ApiService, public dataService: DataService, private router: Router) {
     console.log('Constructor');
   }
 
@@ -24,10 +24,6 @@ export class StoriesOverviewComponent implements OnInit {
       console.log(stories);
       this.stories = stories;
     });
-  }
-
-  sanitizeImageUrl(imageUrl): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl('http://localhost:3000/' + imageUrl);
   }
 
   selectStory(story: IStory) {

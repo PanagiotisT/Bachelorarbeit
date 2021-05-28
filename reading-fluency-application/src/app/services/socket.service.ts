@@ -9,9 +9,10 @@ import { io } from 'socket.io-client';
 export class SocketService implements OnDestroy {
 
   public socketIo: any;
-  readonly uri: string = 'http://localhost:3000';
+  readonly uri: string = 'http://localhost:5000';
 
   constructor(private logService: LogService) {
+    console.log("SOCKET")
     this.socketIo = io(this.uri);
   }
 

@@ -1,10 +1,10 @@
-<h1 class="pageTitle">Geschichten Übersicht</h1>
+<h1 class="pageTitle mb-5">Geschichten Übersicht</h1>
 
 <div class="container" style="max-width: 1250px">
 	<div *ngFor="let story of stories;">
 		<div class="row mt-4 justify-content-center">
 			<div class="col-md-3 v-center">
-				<img [src]="sanitizeImageUrl(story.image)" alt="{{story.name}}" class="img-thumbnail">
+				<img [src]="dataService.sanitizeUrl('http://localhost:3000/' + story.image)" alt="{{story.name}}" class="img-thumbnail">
 			</div>
 			<div class="col-md-5 ml-3">
 				<div class="row mb-2">
