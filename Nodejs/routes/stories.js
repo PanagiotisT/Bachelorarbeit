@@ -6,6 +6,7 @@ router.get('/', async function(req, res) {
 	try {
 		const stories = await Story.find();
 		res.json(stories);
+		console.info("GET /stories called")
 	} catch(error) {
 		console.log(err);
 	}

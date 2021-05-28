@@ -2,17 +2,15 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema;
 
-// Schema noch genauer definieren wenn nötig
 let storySchema = new schema(
 	{
 		name: String,
 		description: String,
 		image: String,
+		UnityWebGL: String,
 		scenes: [{
-			// Noch anpassen und genauer definieren was eine Szene hat
 			name: String,
-			text: String,
-			UnityWebGL: String
+			text: String
 		}],
 		characters: {
 			total: Number,
