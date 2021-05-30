@@ -33,7 +33,7 @@ def onConnect():
 
 @socketio.on('receive-audio-blob')
 def receiveAudioBlob(blob):
-    print('Blob received')
+    # print('Blob received')
     pathlib.Path(audioFolderPath).mkdir(parents=True, exist_ok=True)
     global createdFolder
     global audioBlobs
@@ -49,9 +49,19 @@ def receiveAudioBlob(blob):
 def stopRecording(empty):
     combineAudioBlobs()
 
-    model = pickle.load(open("speechRecognition/Models/mlp_classifier30-Apr17-09-37.model", "rb"))
-    fullFeatures = extract_feature(audioFolderPath + '/FULL-AUDIO.wav', mfcc=True, chroma=True, mel=True).reshape(1, -1)
+
+    # model = pickle.load(open("speechRecognition/Models/mlp_classifier30-Apr17-09-37.model", "rb"))
+    model = pickle.load(open("speechRecognition/Models/mlp_classifier.model", "rb"))
+
+    # DE - ALL
+    model = pickle.load(open("speechRecognition/Models/DE-All.model", "rb"))
+
+    # EN - ALL
+    # model = pickle.load(open("speechRecognition/Models/EN-All.model", "rb"))
+    fullFeatures = extract_feature(audioFolderPath + '/FULL-AUDIO.wav', mfcc=True, chroma=True, mel=True, tonnetz=True, contrast=True).reshape(1, -1)
+
     emotion = model.predict(fullFeatures)[0]
+    print(emotion)
     emit('receive-emotions', emotion)
     resetValues()
 
