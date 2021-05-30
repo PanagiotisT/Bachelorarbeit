@@ -4,7 +4,10 @@
 	<div *ngFor="let story of stories;">
 		<div class="row mt-4 justify-content-center">
 			<div class="col-md-3 v-center">
-				<img [src]="dataService.sanitizeUrl('http://localhost:3000/' + story.image)" alt="{{story.name}}" class="img-thumbnail">
+				<div *ngIf="dataService.localData; else elseBlock">
+					<img src="../../assets/nodb.png" alt="{{story.name}}" class="img-thumbnail">
+				</div>
+				<ng-template #elseBlock><img [src]="dataService.sanitizeUrl('http://localhost:3000/' + story.image)" alt="{{story.name}}" class="img-thumbnail"></ng-template>
 			</div>
 			<div class="col-md-5 ml-3">
 				<div class="row mb-2">

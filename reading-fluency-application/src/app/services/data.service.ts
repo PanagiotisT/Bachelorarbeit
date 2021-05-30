@@ -18,6 +18,7 @@ export class DataService {
 
   audioLengthInSeconds: number;
   audioUrl;
+  localData: boolean;
 
   constructor(private domSanitizer: DomSanitizer) {
     // this.checkLocalStorageForValues();
