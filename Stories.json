@@ -1,0 +1,139 @@
+[{
+  "_id": {
+    "$oid": "6041f079fcfb1a7b847c13ed"
+  },
+  "name": "Zauberlehrling",
+  "description": "Eine Hexe lebt alleine im Wald. Eines Tages sieht Sie in einer Vision, dass bald eine Elfe eintreffen wird. Die Hexe soll die Elfe bei sich aufnehmen und die Künste der Magie lehren.",
+  "image": "images/lehrling.png",
+  "scenes": [
+    {
+      "name": "Szene 1",
+      "text": "Ich frage mich wann die Elfe eintreffen wird. "
+    },
+    {
+      "name": "Szene 2",
+      "text": "Die Hexe ist sehr stark."
+    }
+  ],
+  "characters": {
+    "total": 2,
+    "teller": false,
+    "character": [
+      "Hexe",
+      "Elfe"
+    ]
+  },
+  "unityWebGL": "Geschichte1"
+},{
+  "_id": {
+    "$oid": "6041f085fcfb1a7b847c13ee"
+  },
+  "name": "Weitere-Geschichte",
+  "description": "Das ist die Beschreibung einer weiteren Geschichte. Der Fantasie sind keine Grenzen gesetzt. ",
+  "image": "images/thumbnail.png",
+  "scenes": [
+    {
+      "name": "Szene 1",
+      "text": "Text der Szene 1"
+    }
+  ],
+  "characters": {
+    "total": 3,
+    "teller": true,
+    "character": [
+      "Zwerg 1",
+      "Zwerg 2",
+      "Zwerg 3",
+      "Zwerg 4",
+      "Zwerg 5",
+      "Zwerg 6",
+      "Zwerg 7",
+      "Schneewittchen"
+    ]
+  },
+  "unityWebGL": "Geschichte2"
+},{
+  "_id": {
+    "$oid": "60acd57adda2e758a853cd62"
+  },
+  "name": "Weitere-Geschichte",
+  "description": "Das ist die Beschreibung einer weiteren Geschichte. Der Fantasie sind keine Grenzen gesetzt. ",
+  "image": "images/thumbnail.png",
+  "scenes": [
+    {
+      "name": "Szene 1",
+      "text": "Text der Szene 1"
+    }
+  ],
+  "characters": {
+    "total": 4,
+    "teller": true,
+    "character": [
+      "Zwerg 1",
+      "Zwerg 2",
+      "Zwerg 3",
+      "Zwerg 4",
+      "Zwerg 5",
+      "Zwerg 6",
+      "Zwerg 7",
+      "Schneewittchen"
+    ]
+  },
+  "unityWebGL": "Geschichte2"
+},{
+  "_id": {
+    "$oid": "60acd57edda2e758a853cd63"
+  },
+  "name": "Weitere-Geschichte",
+  "description": "Das ist die Beschreibung einer weiteren Geschichte. Der Fantasie sind keine Grenzen gesetzt. ",
+  "image": "images/thumbnail.png",
+  "scenes": [
+    {
+      "name": "Szene 1",
+      "text": "Text der Szene 1"
+    }
+  ],
+  "characters": {
+    "total": 1,
+    "teller": true,
+    "character": [
+      "Zwerg 1",
+      "Zwerg 2",
+      "Zwerg 3",
+      "Zwerg 4",
+      "Zwerg 5",
+      "Zwerg 6",
+      "Zwerg 7",
+      "Schneewittchen"
+    ]
+  },
+  "unityWebGL": "Geschichte2"
+},{
+  "_id": {
+    "$oid": "60acd580dda2e758a853cd64"
+  },
+  "name": "Weitere-Geschichte",
+  "description": "Das ist die Beschreibung einer weiteren Geschichte. Der Fantasie sind keine Grenzen gesetzt. ",
+  "image": "images/thumbnail.png",
+  "scenes": [
+    {
+      "name": "Szene 1",
+      "text": "Text der Szene 1"
+    }
+  ],
+  "characters": {
+    "total": 7,
+    "teller": true,
+    "character": [
+      "Zwerg 1",
+      "Zwerg 2",
+      "Zwerg 3",
+      "Zwerg 4",
+      "Zwerg 5",
+      "Zwerg 6",
+      "Zwerg 7",
+      "Schneewittchen"
+    ]
+  },
+  "unityWebGL": "Geschichte2"
+}]

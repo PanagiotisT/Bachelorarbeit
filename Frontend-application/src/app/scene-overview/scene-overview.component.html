@@ -1,0 +1,35 @@
+<div class="container-fluid text-center">
+	<div class="row-spaced justify-content-center">
+		<div class="col-md-12">
+			<h1 class="pageTitle"> {{story.name}}</h1>
+			<h6 class="mb-3">- Szenenübersicht -</h6>
+
+			<div class="card-deck justify-content-center clickable">
+				<div *ngFor="let scene of story.scenes; index as i;" class="card-with-limits" (click)="selectScene(i)" [class.border-2]="i == sceneIndex">
+					<h5 class="card-header">
+						{{scene.name}}
+					</h5>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<hr/>
+
+	<div class="row-spaced justify-content-center">
+		<div class="col-md-6">
+			<app-unity-web-gl></app-unity-web-gl>
+		</div>
+		<div class="col-md-6 restrictHeight">
+			<app-textfield></app-textfield>
+			<div class="col-md-12">
+				<app-microphone></app-microphone>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
