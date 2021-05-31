@@ -31,8 +31,8 @@ Es werden Node.js und Python 3.7 benötigt
    4. Virtual Enviroment aktivieren mit ```venv\Scripts\activate```
 
 2. Dependencies installieren und Server starten
-   2. ```pip install -r requirements.txt``` ausführen
-   3. Server mit ```python main.py```starten
+   1. ```pip install -r requirements.txt``` ausführen
+   2. Server mit ```python main.py```starten
 
 
 # Frontend-application
